@@ -1,0 +1,32 @@
+<div ng-app="app">
+<div ng-controller="stuffCtrl" ng-init="setup()">
+
+<div></div>
+<input ng-model="nameFilter">
+<button ng-click="setOrderBy('name')">Order by Name</button>
+<button ng-click="setOrderBy('bio')">Order by Bio</button>
+
+  <div ng-repeat="person in people | filter: {name: nameFilter} | orderBy:orderAttribute:descending track by $index ">
+    <h2 ng-click="toggleBioVisible(person)">{{person.name}} </h2>
+      <div ng-class="person.bioVisible">
+        <p> {{ person.bio }}</p>
+      
+      <p ng-click="deletePerson($index)">Delete Person</p>
+
+      </div>
+    </div>
+
+      <div class="form">
+      <h3 ng-repeat="error in errors">{{ error }}</h3>
+      <h4>Name:
+      <input type="text" ng-model="newName">
+      </h4>
+      <h4>Bio:
+      <input type="text" ng-model="newBio">
+      </h4>
+      <button ng-click="addPerson(newName, newBio)">Add Person</button>
+    </div>
+
+    <h3>Count {{ people.length}} </h3>
+  </div>
+</div>
